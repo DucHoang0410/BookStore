@@ -60,9 +60,14 @@ public class BookService {
         return false;
     }
 
-    // Lấy tất cả sách
-    public List<Book> getAllBooks() {
-        return bookRepository.findAll();
+
+    // Lấy sách theo category
+    public List<Book> getBooksByCategory(Long categoryId) {
+        Category category = categoryRepository.findById(categoryId).orElse(null);
+        if (category != null) {
+            return bookRepository.findByCategory(category);
+        }
+        return null; // Xử lý khi category không tồn tại
     }
 
     // Lấy sách theo ID

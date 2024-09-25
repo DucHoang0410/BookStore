@@ -44,11 +44,14 @@ public class BookController {
         }
     }
 
-    // Lấy tất cả sách
-    @GetMapping
-    public ResponseEntity<List<Book>> getAllBooks() {
-        List<Book> books = bookService.getAllBooks();
-        return ResponseEntity.ok(books);
+    @GetMapping("/category/{categoryId}")
+    public ResponseEntity<List<Book>> getBooksByCategory(@PathVariable Long categoryId) {
+        List<Book> books = bookService.getBooksByCategory(categoryId);
+        if (books != null) {
+            return ResponseEntity.ok(books);
+        } else {
+            return ResponseEntity.notFound().build(); // Xử lý nếu category không tồn tại
+        }
     }
 
     // Lấy sách theo ID

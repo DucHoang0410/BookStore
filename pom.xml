@@ -64,11 +64,12 @@
             <version>0.9.1</version> <!-- Phiên bản này là phiên bản ổn định nhất hiện tại -->
         </dependency>
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>4.0.1</version> <!-- Phiên bản phổ biến, tùy thuộc vào phiên bản Servlet mà bạn sử dụng -->
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>5.0.0</version> <!-- Phiên bản Jakarta EE mới -->
             <scope>provided</scope>
         </dependency>
+
         <dependency>
             <groupId>javax.xml.bind</groupId>
             <artifactId>jaxb-api</artifactId>

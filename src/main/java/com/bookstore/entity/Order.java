@@ -1,11 +1,14 @@
 package com.bookstore.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
-@Table(name = "`orders`") // Vì 'Order' là từ khóa trong SQL, cần sử dụng backticks
+@Table(name = "orders")
+@JsonIgnoreProperties({"items"})  // Bỏ qua thuộc tính items để tránh vòng lặp nếu cần
 public class Order {
 
     @Id
@@ -17,15 +20,19 @@ public class Order {
     private User user;
 
     @Column(nullable = false)
-    private LocalDateTime orderDate = LocalDateTime.now();
+    private LocalDateTime orderDate;
 
     @Column(nullable = false)
     private BigDecimal total;
 
     @Column(nullable = false)
-    private String status = "PENDING";
+    private String status;
 
-    // Getters and Setters
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private List<OrderItem> items;
+
+    // Getters và Setters
+
     public Long getId() {
         return id;
     }
@@ -65,5 +72,12 @@ public class Order {
     public void setStatus(String status) {
         this.status = status;
     }
-}
 
+    public List<OrderItem> getItems() {
+        return items;
+    }
+
+    public void setItems(List<OrderItem> items) {
+        this.items = items;
+    }
+}

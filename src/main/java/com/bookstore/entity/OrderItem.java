@@ -1,5 +1,6 @@
 package com.bookstore.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 
@@ -13,6 +14,7 @@ public class OrderItem {
 
     @ManyToOne
     @JoinColumn(name = "order_id", referencedColumnName = "id")
+    @JsonIgnore  // Ngăn vòng lặp khi trả về dữ liệu
     private Order order;
 
     @ManyToOne
@@ -25,7 +27,7 @@ public class OrderItem {
     @Column(nullable = false)
     private BigDecimal price;
 
-    // Getters and Setters
+    // Getters và Setters
     public Long getId() {
         return id;
     }

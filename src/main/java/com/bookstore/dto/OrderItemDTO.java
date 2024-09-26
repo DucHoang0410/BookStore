@@ -1,47 +1,37 @@
 package com.bookstore.dto;
 
+import java.math.BigDecimal;
+
 public class OrderItemDTO {
 
-    private Long id;
-    private Long orderId;
     private Long bookId;
+    private String bookTitle;
     private int quantity;
-    private double price;
+    private BigDecimal price;
 
     // Constructors
-    public OrderItemDTO() {}
-
-    public OrderItemDTO(Long id, Long orderId, Long bookId, int quantity, double price) {
-        this.id = id;
-        this.orderId = orderId;
+    public OrderItemDTO(Long bookId, String bookTitle, int quantity, BigDecimal price) {
         this.bookId = bookId;
+        this.bookTitle = bookTitle;
         this.quantity = quantity;
         this.price = price;
     }
 
-    // Getters and Setters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
-    }
-
+    // Getters và Setters
     public Long getBookId() {
         return bookId;
     }
 
     public void setBookId(Long bookId) {
         this.bookId = bookId;
+    }
+
+    public String getBookTitle() {
+        return bookTitle;
+    }
+
+    public void setBookTitle(String bookTitle) {
+        this.bookTitle = bookTitle;
     }
 
     public int getQuantity() {
@@ -52,12 +42,11 @@ public class OrderItemDTO {
         this.quantity = quantity;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 }
-

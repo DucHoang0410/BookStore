@@ -41,11 +41,14 @@ public class CartService {
         Book book = bookRepository.findById(bookId)
                 .orElseThrow(() -> new RuntimeException("Book not found with id: " + bookId));
 
-        Cart cart = cartRepository.findByUser(user).orElseGet(() -> {
-            Cart newCart = new Cart();
-            newCart.setUser(user);
-            return cartRepository.save(newCart);
-        });
+        Cart cart = cartRepository.findByUser(user).orElse(null);
+
+        // Kiểm tra nếu không có giỏ hàng, tạo mới giỏ hàng
+        if (cart == null) {
+            cart = new Cart();
+            cart.setUser(user);
+            cart = cartRepository.save(cart);
+        }
 
         Optional<CartItem> existingCartItem = cart.getItems().stream()
                 .filter(item -> item.getBook().getId().equals(bookId))
@@ -137,7 +140,7 @@ public class CartService {
                         item.getBook().getTitle(),
                         item.getQuantity(),
                         item.getPrice(),
-                        item.getBook().getImageUrl() // Thêm imageUrl
+                        item.getBook().getImageUrl() // Thêm imageUrl vào đây
                 ))
                 .collect(Collectors.toList());
 

@@ -69,6 +69,11 @@ public class OrderService {
         cartItemRepository.deleteAll(cart.getItems());
         cartRepository.delete(cart);
 
+        // **Tạo giỏ hàng mới cho người dùng**
+        Cart newCart = new Cart();
+        newCart.setUser(user);
+        cartRepository.save(newCart);
+
         // Trả về danh sách các sản phẩm đã mua trong đơn hàng dưới dạng DTO
         return orderItems.stream()
                 .map(orderItem -> new OrderBookDTO(
@@ -82,16 +87,12 @@ public class OrderService {
 
     // Lấy danh sách tất cả các đơn hàng của một người dùng
     public List<OrderDTO> getOrdersByUserId(Long userId) {
-        // Kiểm tra sự tồn tại của người dùng
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found with id: " + userId));
 
-        // Lấy danh sách đơn hàng của người dùng
         List<Order> orders = orderRepository.findByUser(user);
 
-        // Chuyển đổi từ Order sang OrderDTO
         return orders.stream().map(order -> {
-            // Chuyển đổi từng OrderItem sang OrderItemDTO
             List<OrderItemDTO> itemDTOs = order.getItems().stream().map(item -> {
                 return new OrderItemDTO(
                         item.getBook().getId(),
@@ -102,7 +103,6 @@ public class OrderService {
                 );
             }).collect(Collectors.toList());
 
-            // Chuyển đổi Order thành OrderDTO
             return new OrderDTO(
                     order.getId(),
                     order.getOrderDate(),
@@ -136,7 +136,6 @@ public class OrderService {
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new RuntimeException("Order not found with id: " + orderId));
 
-        // Đặt trạng thái của đơn hàng thành "CANCELED"
         order.setStatus("CANCELED");
         orderRepository.save(order);
     }

@@ -11,13 +11,14 @@ public class CartItemDTO {
     private BigDecimal price;
     private String imageUrl; // Thêm trường imageUrl
 
+    // Constructor
     public CartItemDTO(Long id, Long bookId, String bookTitle, int quantity, BigDecimal price, String imageUrl) {
         this.id = id;
         this.bookId = bookId;
         this.bookTitle = bookTitle;
         this.quantity = quantity;
         this.price = price;
-        this.imageUrl = imageUrl; // Thêm imageUrl vào constructor
+        this.imageUrl = imageUrl; // Gán giá trị cho imageUrl
     }
 
     // Getters và Setters

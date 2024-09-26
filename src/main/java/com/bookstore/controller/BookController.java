@@ -65,4 +65,15 @@ public class BookController {
             return ResponseEntity.notFound().build();
         }
     }
+    // Lấy tất cả sách
+    @GetMapping("")
+    public ResponseEntity<List<Book>> getAllBooks() {
+        List<Book> books = bookService.getAllBooks();
+        if (!books.isEmpty()) {
+            return ResponseEntity.ok(books);
+        } else {
+            return ResponseEntity.noContent().build(); // Trả về 204 nếu không có sách
+        }
+    }
+
 }

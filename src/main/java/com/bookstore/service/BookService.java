@@ -79,5 +79,9 @@ public class BookService {
     public List<Book> getAllBooks() {
         return bookRepository.findAll(); // Sử dụng phương thức findAll() của JPA
     }
+    // Tìm sách theo tên sách
+    public List<Book> searchBooksByTitle(String title) {
+        return bookRepository.findByTitleContainingIgnoreCase(title);
+    }
 
 }

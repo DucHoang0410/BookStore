@@ -75,5 +75,15 @@ public class BookController {
             return ResponseEntity.noContent().build(); // Trả về 204 nếu không có sách
         }
     }
+    // API tìm kiếm sách theo tên
+    @GetMapping("/search")
+    public ResponseEntity<List<Book>> searchBooksByTitle(@RequestParam String title) {
+        List<Book> books = bookService.searchBooksByTitle(title);
+        if (!books.isEmpty()) {
+            return ResponseEntity.ok(books);
+        } else {
+            return ResponseEntity.noContent().build(); // Trả về 204 nếu không có sách
+        }
+    }
 
 }

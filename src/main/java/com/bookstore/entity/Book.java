@@ -24,11 +24,15 @@ public class Book {
 
     private int stock;
 
+    // Thêm trường lưu URL ảnh của sách
+    @Column(name = "image_url")
+    private String imageUrl;
+
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
 
-    // Getters and Setters
+    // Getters và Setters
     public Long getId() {
         return id;
     }
@@ -77,6 +81,14 @@ public class Book {
         this.stock = stock;
     }
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
     public Category getCategory() {
         return category;
     }
@@ -85,4 +97,3 @@ public class Book {
         this.category = category;
     }
 }
-

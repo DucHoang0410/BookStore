@@ -44,6 +44,7 @@ public class BookController {
         }
     }
 
+    // Lấy danh sách sách theo Category
     @GetMapping("/category/{categoryId}")
     public ResponseEntity<List<Book>> getBooksByCategory(@PathVariable Long categoryId) {
         List<Book> books = bookService.getBooksByCategory(categoryId);

@@ -12,7 +12,7 @@ public class OrderDTO {
     private String status;
     private List<OrderItemDTO> items;
 
-    // Constructors
+    // Constructor
     public OrderDTO(Long id, LocalDateTime orderDate, BigDecimal total, String status, List<OrderItemDTO> items) {
         this.id = id;
         this.orderDate = orderDate;

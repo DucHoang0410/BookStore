@@ -39,6 +39,7 @@ public class BookService {
             book.setDescription(bookDetails.getDescription());
             book.setPrice(bookDetails.getPrice());
             book.setStock(bookDetails.getStock());
+            book.setImageUrl(bookDetails.getImageUrl()); // Cập nhật trường imageUrl
 
             if (bookDetails.getCategory() != null && bookDetails.getCategory().getId() != null) {
                 Category category = categoryRepository.findById(bookDetails.getCategory().getId()).orElse(null);
@@ -59,7 +60,6 @@ public class BookService {
         }
         return false;
     }
-
 
     // Lấy sách theo category
     public List<Book> getBooksByCategory(Long categoryId) {

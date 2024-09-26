@@ -120,8 +120,6 @@ public class CartService {
         return mapToCartDTO(cart);
     }
 
-
-
     private void updateCartTotal(Cart cart) {
         BigDecimal total = cart.getItems().stream()
                 .map(CartItem::getPrice)
@@ -130,6 +128,7 @@ public class CartService {
         cartRepository.save(cart);
     }
 
+    // Cập nhật phương thức để bao gồm cả imageUrl
     private CartDTO mapToCartDTO(Cart cart) {
         List<CartItemDTO> cartItems = cart.getItems().stream()
                 .map(item -> new CartItemDTO(
@@ -137,7 +136,9 @@ public class CartService {
                         item.getBook().getId(),
                         item.getBook().getTitle(),
                         item.getQuantity(),
-                        item.getPrice()))
+                        item.getPrice(),
+                        item.getBook().getImageUrl() // Thêm imageUrl
+                ))
                 .collect(Collectors.toList());
 
         return new CartDTO(cart.getId(), cart.getUser().getId(), cart.getTotal(), cartItems);

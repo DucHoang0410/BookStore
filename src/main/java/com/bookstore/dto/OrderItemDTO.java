@@ -8,13 +8,15 @@ public class OrderItemDTO {
     private String bookTitle;
     private int quantity;
     private BigDecimal price;
+    private String imageUrl;
 
-    // Constructors
-    public OrderItemDTO(Long bookId, String bookTitle, int quantity, BigDecimal price) {
+    // Constructor
+    public OrderItemDTO(Long bookId, String bookTitle, int quantity, BigDecimal price, String imageUrl) {
         this.bookId = bookId;
         this.bookTitle = bookTitle;
         this.quantity = quantity;
         this.price = price;
+        this.imageUrl = imageUrl;
     }
 
     // Getters và Setters
@@ -48,5 +50,13 @@ public class OrderItemDTO {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

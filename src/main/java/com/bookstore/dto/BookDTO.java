@@ -9,11 +9,12 @@ public class BookDTO {
     private double price;
     private int stock;
     private Long categoryId;
+    private String imageUrl; // Thêm trường imageUrl
 
     // Constructors
     public BookDTO() {}
 
-    public BookDTO(Long id, String title, String author, String description, double price, int stock, Long categoryId) {
+    public BookDTO(Long id, String title, String author, String description, double price, int stock, Long categoryId, String imageUrl) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -21,9 +22,10 @@ public class BookDTO {
         this.price = price;
         this.stock = stock;
         this.categoryId = categoryId;
+        this.imageUrl = imageUrl; // Thêm trường imageUrl
     }
 
-    // Getters and Setters
+    // Getters và Setters
     public Long getId() {
         return id;
     }
@@ -78,5 +80,13 @@ public class BookDTO {
 
     public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

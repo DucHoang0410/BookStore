@@ -1,5 +1,6 @@
 package com.bookstore.controller;
 
+import com.bookstore.dto.LoginDTO;
 import com.bookstore.dto.UserDTO;
 import com.bookstore.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,8 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestParam String username, @RequestParam String password) {
-        UserDTO userDTO = userService.loginUser(username, password);
+    public ResponseEntity<?> loginUser(@RequestBody LoginDTO loginDTO) {
+        UserDTO userDTO = userService.loginUser(loginDTO.getUsername(), loginDTO.getPassword());
         if (userDTO == null) {
             return ResponseEntity.badRequest().body("Đăng nhập thất bại");
         }

@@ -3,10 +3,12 @@ package com.bookstore.controller;
 import com.bookstore.entity.Book;
 import com.bookstore.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/books")
@@ -35,12 +37,15 @@ public class BookController {
 
     // Xóa sách
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteBook(@PathVariable Long id) {
+    public ResponseEntity<?> deleteBook(@PathVariable Long id) {
         boolean isDeleted = bookService.deleteBook(id);
+
         if (isDeleted) {
-            return ResponseEntity.ok("Book deleted successfully.");
+            // Trả về JSON với thông báo thành công
+            return ResponseEntity.ok(Map.of("message", "Book deleted successfully"));
         } else {
-            return ResponseEntity.notFound().build();
+            // Trả về JSON với thông báo thất bại
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message", "Book not found"));
         }
     }
 
